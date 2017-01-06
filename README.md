@@ -43,7 +43,7 @@ Done
 Give your pc a drive to hold files.  I mounted a USB drive and set it up as a standard volume with this path: /mnt/SystemDataset  
 Put the script in /mnt/SystemDataset  
 Open the script and edit the variable 'Save_Path' to fit your environment  
-Set the script to be executable\  
+Set the script to be executable  
 Check which disk you want to test:  
 hwinfo --disk  
 or  
@@ -53,7 +53,7 @@ Run it like this:
 #Script will disappear into background while it's running as it might take a long while  
 To view status: tmux attach -t sda  
 To detach: Ctrl+B,D  
-To switch between sessions when running multiple test, attach then press Ctrl+B,S, use arrows keys and enter to switch
+To switch between sessions when running multiple test, attach then press Ctrl+B,S, use arrows keys and enter to switch   
 
 #I've canceled the script and now I can't restart it as it says it's already running, what do I do?   
 Remove the files it created, they start with the disk model   
