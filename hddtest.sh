@@ -54,6 +54,13 @@ if [ $mounted -gt 0 ]; then
         exit -1
 fi
 
+# Get Drive Details
+Drive_Model=$(smartctl -a /dev/$Drive | grep "Device Model" | awk '{print $4}')
+Drive_Serial_Number=$(smartctl -a /dev/$Drive | grep "Serial" | awk '{print $3}')
+echo Drive_Model=$Drive_Model
+echo Drive_Serial_Number=$Drive_Serial_Number
+
+
 #don't show wipe warning when entering TMUX
 if ! [ -n "$TMUX" ]; then
 	#badblocks test will wipe the specified disk, warn user!
@@ -66,12 +73,6 @@ if ! [ -n "$TMUX" ]; then
 # 	   echo "Continueing!"
 #	fi
 fi
-
-# Get Drive Details
-Drive_Model=$(smartctl -a /dev/$Drive | grep "Device Model" | awk '{print $4}')
-Drive_Serial_Number=$(smartctl -a /dev/$Drive | grep "Serial" | awk '{print $3}')
-echo Drive_Model=$Drive_Model
-echo Drive_Serial_Number=$Drive_Serial_Number
 
 # Test if the "In-Progress" file already exists
 File_Count=$(ls -lR *$Drive_Serial_Number*In-Progress 2>/dev/null | wc -l)
