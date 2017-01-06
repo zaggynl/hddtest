@@ -10,6 +10,9 @@
 #check if tmux is installed
 command -v tmux >/dev/null 2>&1 || { echo >&2 "I require tmux but it's not installed.  Aborting."; exit 1; }
 
+#check if smartctl(smartmontools) is installed
+command -v smartctl >/dev/null 2>&1 || { echo >&2 "I require smartctl but it's not installed.  Aborting."; exit 1; }
+
 #confirm function from https://stackoverflow.com/a/3232082
 confirm () {
     # call with a prompt string or use a default
@@ -28,7 +31,6 @@ confirm () {
 if [ $# -eq 0 ]
   then
     echo "Please specify disk to check, example: sda"
-    echo "Note: specified disk will be wiped!"
     exit -1
 fi
 
@@ -42,7 +44,7 @@ Save_Path=/root #path to save progress and result files
 if [ $(ls -R /dev/$Drive 2>/dev/null) ]; then
 	echo "Found /dev/$Drive!"
 else
-	echo "Drive $Drive is not found."
+	echo "Drive /dev/$Drive is not found."
 	echo "Exiting..."
 	exit -1
 fi
@@ -66,12 +68,6 @@ if ! [ -n "$TMUX" ]; then
 	#badblocks test will wipe the specified disk, warn user!
 	if ! confirm; then exit
 	fi
-#	read -p "THIS WILL WIPE DISK /dev/"$Drive", CONTINUE? [Y to continue, any other to stop.]" -n 1 -r
-#	echo
-#	if [[ $REPLY =~ ^[Yy]$ ]]
-#	then
-# 	   echo "Continueing!"
-#	fi
 fi
 
 # Test if the "In-Progress" file already exists
@@ -118,9 +114,7 @@ echo $CompleteDate > $Save_File
 echo SMART Short Self-test will finish at: $CompleteDate
 current_epoch=$(date +%s)
 target_epoch=`date -d"$CompleteDate" +%s`
-#echo $target_epoch - $current_epoch + 2
 sleep_seconds=$(( $target_epoch - $current_epoch + 2))
-#smartctl -X /dev/$Drive
 sleep $sleep_seconds
 echo SMART short test completed
 echo
@@ -129,7 +123,6 @@ echo
 
 # Start conveyance self-test
 # Sleep during self-test
-#clear
 CompleteDate=$(smartctl -t conveyance /dev/$Drive | grep after | cut -c 25-100)
 echo Performing Conveyance Self-Test on $Drive_Model S/N:$Drive_Serial_Number
 echo SMART Conveyance Self-test will finish at: $CompleteDate
@@ -155,7 +148,6 @@ echo $CompleteDate > $Save_File
 current_epoch=$(date +%s)
 target_epoch=`date -d"$CompleteDate" +%s`
 sleep_seconds=$(( $target_epoch - $current_epoch + 2))
-#smartctl -X /dev/$Drive
 sleep $sleep_seconds
 echo SMART long test completed
 echo
@@ -165,7 +157,6 @@ echo
 # NOTE:  This is a blocking command.  Additional commands
 #        will not run until this command is finished.
 #        No need to use a sleep command.
-#clear
 echo Performing Destructive BadBlocks Test on $Drive_Model S/N:$Drive_Serial_Number
 echo This test may take days to complete.
 Save_File=$Save_Path/$Drive_Model"_"$Drive_Serial_Number"_"$(date -u +"%Y-%m-%dT%H.%M.%SZ")"_"$Drive"_BadBlocks"
@@ -176,7 +167,6 @@ echo
 
 # Start long self-test
 # Sleep during self-test
-#clear
 CompleteDate=$(smartctl -t long /dev/$Drive | grep after | cut -c 25-100)
 echo Performing Long Self-Test \#2 on $Drive_Model S/N:$Drive_Serial_Number
 echo SMAR Long Self-Test \#2 will be finished at: $CompleteDate
@@ -185,7 +175,6 @@ echo $CompleteDate > $Save_File
 current_epoch=$(date +%s)
 target_epoch=`date -d"$CompleteDate" +%s`
 sleep_seconds=$(( $target_epoch - $current_epoch + 2))
-#smartctl -X /dev/$Drive
 sleep $sleep_seconds
 echo SMART long test 2 completed
 echo
@@ -201,6 +190,5 @@ rm $In_Progress_File_Name
 
 # Create "Completed" Status File
 touch $Save_Path/$Drive_Model"_"$Drive_Serial_Number"_"$(date -u +"%Y-%m-%dT%H.%M.%SZ")"_"$Drive"_Completed"
-#exit
 #fi from yes/no at top
 fi
