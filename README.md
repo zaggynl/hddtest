@@ -9,7 +9,7 @@ Original FreeNAS script from: https://forums.freenas.org/index.php?threads/how-t
 Switch to bash  
 Set save path  
 Verify disk exists  
-Get and display drive model number & serial number  
+Get and display drive model & serial number  
 Warn before starting as badblocks runs in destructive mode  
 Verify disk not already in use by mount | grep disk  
 Verify disk not already under test  
