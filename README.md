@@ -1,4 +1,5 @@
 FreeNAS HDD torture test by The Gecko modified for Linux by zaggynl
+
 Original FreeNAS script from: https://forums.freenas.org/index.php?threads/how-to-hard-drive-burn-in-testing.21451/page-5#post-191587
 #added:
 -check if tmux is installed, stop if missing
