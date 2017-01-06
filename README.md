@@ -37,7 +37,7 @@ hwinfo --disk
 or  
 lshw --class disk --class storage  
 Run it like this:  
- ./drive_burn_in.sh sda  
+ ./hddtest.sh sda  
 #Script will disappear into background while it's running as it might take a long while  
 To view status: tmux attach -t sda  
 To detach: Ctrl+B,D  
