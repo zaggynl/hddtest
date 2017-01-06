@@ -12,7 +12,7 @@ Errors, lots of errors, check the SMART status with smartctl -a /dev/sda (where 
 -added check if tmux is installed, stop if missing    
 -added check if smartctl is installed, stop if missing     
 -stop if no disk specified  
--confirm start as badblocks runs in destructive mode 
+-confirm start as badblocks runs in destructive mode    
 -removed raw debug setting, not used in Linux?   
 -removed some commented code that was unused
   
