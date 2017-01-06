@@ -6,7 +6,7 @@ When you receive a bunch of new disks you want to make sure they are all OK _bef
 This script runs all SMART tests and then runs badblocks in destructive mode (bye existing data) to test for bad sectors.  
 
 #How do I know if a disk is bad?   
-Errors, lots of errors, check the SMART status with hdparm -H /dev/sda (where /dev/sda is the correct device) and check the output of badblocks.   
+Errors, lots of errors, check the SMART status with smartctl -a /dev/sda (where /dev/sda is the correct device) and check the output of badblocks.   
 
 #Things I changed in the original script:      
 -added check if tmux is installed, stop if missing    
