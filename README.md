@@ -23,7 +23,7 @@ Set save path
 Verify disk exists  
 Save and display drive model & serial number  
 Confirm start as badblocks runs in destructive mode  
-Check if disk is mounted
+Check if disk is mounted   
 Check if this script is not already running for this disk  
 Spawn tmux session.  Name tmux session after disk device designation (ie. "sda")  
 Create"In-Progress" status file  
