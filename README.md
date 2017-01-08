@@ -27,7 +27,7 @@ Check if disk is mounted
 Check if this script is not already running for this disk  
 Spawn tmux session.  Name tmux session after disk device designation (ie. "sda")  
 Create"In-Progress" status file  
-Forcibly cancel previous SMART test  
+Forcibly cancel any running SMART test for this disk   
 Save SMART details to disk  
 Start SMART short test.  Write time stamp of completion to log file.  Sleep until complete.  
 Start SMART conveyance test.  Write time stamp of completion to log file.  Sleep until complete.    
