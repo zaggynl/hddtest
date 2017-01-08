@@ -101,7 +101,7 @@ smartctl -X /dev/$Drive 2>/dev/null -q silent
 # Save SMART Details to Disk
 Save_File=$Save_Path/$Drive_Model"_"$Drive_Serial_Number"_"$(date -u +"%Y-%m-%dT%H.%M.%SZ")"_"$Drive
 touch $Save_File"_SMART_Details.txt"
-smartctl -a /dev/$Drive > $Save_File"_SMART_Details.txt"
+smartctl -a /dev/$Drive > $Save_File"_SMART_Details_before_test.txt"
 
 
 # Start short self-test
@@ -183,7 +183,7 @@ echo
 # Save SMART Details to Disk
 Save_File=$Save_Path/$Drive_Model"_"$Drive_Serial_Number"_"$(date -u +"%Y-%m-%dT%H.%M.%SZ")"_"$Drive
 touch $Save_File"_SMART_Details.txt"
-smartctl -a /dev/$Drive > $Save_File"_SMART_Details.txt"
+smartctl -a /dev/$Drive > $Save_File"_SMART_Details_after_test.txt"
 
 # Remove "In-Progress" Status File
 rm $In_Progress_File_Name
