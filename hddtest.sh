@@ -169,7 +169,7 @@ echo
 # Sleep during self-test
 CompleteDate=$(smartctl -t long /dev/$Drive | grep after | cut -c 25-100)
 echo Performing Long Self-Test \#2 on $Drive_Model S/N:$Drive_Serial_Number
-echo SMAR Long Self-Test \#2 will be finished at: $CompleteDate
+echo SMART Long Self-Test \#2 will be finished at: $CompleteDate
 Save_File=$Save_Path/$Drive_Model"_"$Drive_Serial_Number"_"$(date -u +"%Y-%m-%dT%H.%M.%SZ")"_"$Drive"_SMART_Test_Long"
 echo $CompleteDate > $Save_File
 current_epoch=$(date +%s)
