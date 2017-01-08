@@ -17,10 +17,10 @@ Errors, lots of errors, check the SMART status with smartctl -a /dev/sda (where 
 -removed some commented code that was unused
   
 #What does it do?   
-Test if tmux and smartctl are installed  
-Check if a disk was specified
-Set save path  
-Verify disk exists  
+Test if tmux and smartctl are installed   
+Check if a disk was specified     
+Set save path    
+Verify disk exists   
 Save and display drive model & serial number  
 Confirm start as badblocks runs in destructive mode  
 Check if disk is mounted   
