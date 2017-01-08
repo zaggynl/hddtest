@@ -8,6 +8,7 @@ This script runs all SMART tests and then runs badblocks in destructive mode (by
 #How do I know if a disk is bad?   
 Errors, lots of errors, check the SMART status with smartctl -a /dev/sda (where /dev/sda is the correct device) and check the output of badblocks.   
 
+
 #Things I changed in the original script:      
 -added check if tmux is installed, stop if missing    
 -added check if smartctl is installed, stop if missing     
@@ -28,13 +29,13 @@ Check if this script is not already running for this disk
 Spawn tmux session.  Name tmux session after disk device designation (ie. "sda")  
 Create"In-Progress" status file  
 Forcibly cancel any running SMART test for this disk   
-Save SMART details to disk  
+Save current SMART details to disk  
 Start SMART short test.  Write time stamp of completion to log file.  Sleep until complete.  
 Start SMART conveyance test.  Write time stamp of completion to log file.  Sleep until complete.    
 Start SMART long test.  Write time stamp of completion to log file.  Sleep until complete.    
 Run destructive badblocks test (default settings)  
 Start SMART long test.  Write time stamp of completion to log file.  Sleep until complete.   
-Save SMART details to disk  
+Save new SMART details to disk  
 Remove "In-Progress" Status File  
 Create "Completed" Status File  
 Done  
